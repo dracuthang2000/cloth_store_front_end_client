@@ -1,0 +1,35 @@
+:root{
+    --primary-color:'#0e48fe';
+    --primary-hover:'#29e6a7';
+    --primary-dark:'#039d69';
+    --gray100:'#f9fbff';
+    --gray150:'#f4f6fb';
+    --gray200:'#eef1f6';
+    --gray300:'#e1e5ee';
+    --gray400:'#767b91';
+    --gray500:'#4f546c';
+    --gray600:'#2a324b';
+    --gray700:'#161d34';
+}
+
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    color: #4f546c;
+}
+*,
+*::before
+,*::after{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.wrapper-item{
+    margin: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    justify-content: flex-start;
+}

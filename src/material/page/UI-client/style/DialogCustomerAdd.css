@@ -1,0 +1,7 @@
+.btn-add:hover{
+    background-color: #0e48fe; /* Green */
+    color: white;
+}
+#customized-dialog-title{
+    text-align: center;
+}
