@@ -9,8 +9,7 @@ const Card = (props: any) => {
         <div className="card-item">
             <img src={props.img} className="card__img" />
             <div className="card__body">
-                <h2 className="card_title">{props.title}</h2>
-                <p className="card__description">{props.description}</p>
+                <span className="card_title">{props.title}</span>
                 <div className="priceContainer">
                     <div className="card_discount">{props.priceDiscount}</div>
                     <div className="card_price">{props.price}</div>
@@ -19,7 +18,13 @@ const Card = (props: any) => {
                     <button className="card__btn" onClick={() => setOpenDialogCart(true)}><AddShoppingCart /></button>
                 </div>
             </div>
-            <CustomizedDialogs open={openDialogCart} setOpen={setOpenDialogCart} title={'Add to cart'}><AddCartDetail price={props.price} /></CustomizedDialogs>
+            <CustomizedDialogs open={openDialogCart}
+                setOpen={setOpenDialogCart}
+                price={props.price}
+                priceDiscount={props.priceDiscount}
+                title={props.title}>
+                <AddCartDetail price={props.price} />
+            </CustomizedDialogs>
         </div>
     )
 }

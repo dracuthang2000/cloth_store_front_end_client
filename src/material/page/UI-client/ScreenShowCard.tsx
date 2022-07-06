@@ -4,13 +4,17 @@ import CardItem from './CardItem';
 import './style/ScreenCard.css'
 const ScreenCard = () => {
     const arr = [
-        { img: require('../../image/clothing.png'), title: 'clothes', price: '1200$', priceDiscount: '1500$', description: 'test' },
-        { img: require('../../image/clothing.png'), title: 'clothes', price: '1000$', priceDiscount: '1500$', description: 'test' },
-        { img: require('../../image/clothing.png'), title: 'clothes', price: '1000$', priceDiscount: '1500$', description: 'test' },
-        { img: require('../../image/clothing.png'), title: 'clothes', price: '1000$', priceDiscount: '1500$', description: 'test' },
-        { img: require('../../image/clothing.png'), title: 'clothes', price: '1000$', priceDiscount: '1500$', description: 'test' },
-        { img: require('../../image/clothing.png'), title: 'clothes', price: '1000$', priceDiscount: '1500$', description: 'test' },
-        { img: require('../../image/clothing.png'), title: 'clothes', price: '1000$', priceDiscount: '', description: 'test' }
+        { img: require('../../image/clothing.png'), title: 'clothes', price: '1200$', priceDiscount: '1500$' },
+        { img: require('../../image/clothing.png'), title: 'clothes', price: '1000$', priceDiscount: '1500$' },
+        { img: require('../../image/clothing.png'), title: 'clothes', price: '1000$', priceDiscount: '1500$' },
+        { img: require('../../image/clothing.png'), title: 'clothes', price: '1000$', priceDiscount: '1500$' },
+        { img: require('../../image/clothing.png'), title: 'clothes', price: '1000$', priceDiscount: '1500$' },
+        { img: require('../../image/clothing.png'), title: 'clothes', price: '1000$', priceDiscount: '1500$' },
+        { img: require('../../image/clothing.png'), title: 'clothes', price: '1000$', priceDiscount: '' }
+        , { img: require('../../image/clothing.png'), title: 'clothes', price: '1000$', priceDiscount: '1500$' },
+        { img: require('../../image/clothing.png'), title: 'clothes', price: '1000$', priceDiscount: '1500$' },
+        { img: require('../../image/clothing.png'), title: 'clothes', price: '1000$', priceDiscount: '1500$' },
+        { img: require('../../image/clothing.png'), title: 'clothes', price: '1000$', priceDiscount: '' }
     ]
     return (
         <Container>
@@ -19,7 +23,6 @@ const ScreenCard = () => {
                     img={a.img}
                     title={a.title}
                     priceDiscount={a.priceDiscount}
-                    description={a.description}
                     price={a.price}
                 />))}
             </div>

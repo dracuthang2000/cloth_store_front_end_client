@@ -8,6 +8,7 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
+import { Row, Col } from 'react-bootstrap';
 import './style/DialogCustomerAdd.css';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -62,7 +63,17 @@ export default function CustomizedDialogs(props: any) {
                 open={props.open}
             >
                 <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    {props.title}
+                    <Row><span className='title'>{props.title}</span></Row>
+                    <Row>
+                        <Col>
+                            <span className='price'>
+                                {props.price}
+                            </span>
+                            <span className='priceDiscount'>
+                                {props.priceDiscount}
+                            </span>
+                        </Col>
+                    </Row>
                 </BootstrapDialogTitle>
                 <DialogContent dividers>
                     <Typography gutterBottom>
@@ -70,7 +81,7 @@ export default function CustomizedDialogs(props: any) {
                     </Typography>
                 </DialogContent>
                 <DialogActions style={{ justifyContent: 'center' }}>
-                    <Button className='btn-add' style={{ width: '80%' }} autoFocus onClick={handleClose}>
+                    <Button id='btn-add' style={{ width: '80%' }} autoFocus onClick={handleClose}>
                         ADD
                     </Button>
                 </DialogActions>
