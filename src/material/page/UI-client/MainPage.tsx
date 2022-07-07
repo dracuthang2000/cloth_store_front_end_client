@@ -6,7 +6,6 @@ import NavigateHeader from './Header';
 import ScreenCard from './ScreenShowCard';
 
 const MainPage = () => {
-
     return (
         <div className="main">
             <div style={{ width: '100%', position: 'fixed' }}>
