@@ -67,11 +67,11 @@ export default function CustomizedDialogs(props: any) {
                     <Row>
                         <Col>
                             <span className='price'>
-                                {props.price}
+                                {props.price_discount}
                             </span>
-                            <span className='priceDiscount'>
-                                {props.priceDiscount}
-                            </span>
+                            {props.price_current ? <span className='priceDiscount'>
+                                {props.price_current}
+                            </span> : null}
                         </Col>
                     </Row>
                 </BootstrapDialogTitle>

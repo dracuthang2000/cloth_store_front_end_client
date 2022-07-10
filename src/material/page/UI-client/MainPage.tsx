@@ -8,7 +8,7 @@ import ScreenCard from './ScreenShowCard';
 const MainPage = () => {
     return (
         <div className="main">
-            <div style={{ width: '100%', position: 'fixed' }}>
+            <div>
                 <NavigateHeader />
             </div>
             <Container fluid style={{ paddingTop: '80px' }}>

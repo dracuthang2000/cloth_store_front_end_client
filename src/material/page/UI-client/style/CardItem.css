@@ -26,16 +26,23 @@ body{
 }
 .card-item{
     display: flex;
+    position: relative;
     flex-direction: column;
-    width: 250px;
+    width: 220px;
+    height: 400px;
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
+    padding: 5px;
+
 }
 .card__img{
-    height: 20vh;
+    height: 260px;
+    border-color: #4f546c;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
     object-fit: contain;
 }
 .card__body{
@@ -45,16 +52,28 @@ body{
 .card__title{
     line-height: 1.4rem;
     margin-bottom: 0.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.card__title span:hover{
+    color: rgba(213, 5, 5, 0.836);
+    cursor: pointer;
+    text-decoration: underline;
 }
 .card__description{
     line-height: 1.2rem;
 }
 .card__price{
     line-height: 1.4rem;
-    margin-top:0.6rem;
+    color: #f30c28;
 }
-.card__price::before{
-    content: '$';
+.card__price::after{
+    content: 'đ';
+    font-size: 1rem;
+}
+.card__discount::after{
+    content: 'đ';
     font-size: 1rem;
 }
 .card__btn{
@@ -74,15 +93,43 @@ body{
     background-color: #0e48fe; /* Green */
     color: white;
 }
-.cardBtnContainer{
-    position: relative;
-}
 .priceContainer{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
 }
-.card_discount{
-    margin-right: 5px;
+.card__discount{
     text-decoration: line-through;
+    color: #bebebe;
+}
+.card-item:hover{
+    box-shadow: 0 0 11px rgba(33,33,33,.2); 
+    cursor: pointer;
+}
+.circle-notify{
+    border-radius: 100%;
+    text-align: center;
+    background-color: #d51c24;
+    color: white;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    padding-top: 12px;
+    right: 1px;
+    top:1px;
+}
+.discount-notify{
+    background-color: #f1f1f1;
+    width: 50px;
+    color: #333;
+    position: absolute;
+    left: 10px;
+    top:10px;
+    text-align: center;
+}
+.discount-notify::before{
+    content: '-';
+}
+.discount-notify::after{
+    content: '%';
 }

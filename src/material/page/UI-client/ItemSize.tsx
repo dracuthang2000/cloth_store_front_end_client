@@ -3,7 +3,11 @@ import './style/ItemSize.css'
 const ItemSize = (props: any) => {
     const handleClickSize = () => {
         props.setIsSelectSize(() => {
-            return { select: true, id: props.id };
+            if (props.quantity === 0) {
+                return { select: false, id: props.id, quantity: props.quantity };
+            } else {
+                return { select: true, id: props.id, quantity: props.quantity };
+            }
         })
     }
     return (

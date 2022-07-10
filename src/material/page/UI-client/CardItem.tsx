@@ -5,25 +5,37 @@ import CustomizedDialogs from "./CustomDialog";
 import AddCartDetail from "./AddCartDetail";
 const Card = (props: any) => {
     const [openDialogCart, setOpenDialogCart] = useState(false);
+    const priceDiscount = (price: any, discount_percent: any) => {
+        const priceAfterDiscount = price - ((price * discount_percent) / 100);
+        return new Intl.NumberFormat().format(priceAfterDiscount);
+    }
     return (
-        <div className="card-item">
+        <div className="card-item" title={props.title}>
             <img src={props.img} className="card__img" />
             <div className="card__body">
-                <span className="card_title">{props.title}</span>
+                <div className="card__title">
+                    <span>{props.title}</span>
+                </div>
                 <div className="priceContainer">
-                    <div className="card_discount">{props.priceDiscount}</div>
-                    <div className="card_price">{props.price}</div>
+                    <div className="card__price">{props.discount_percent ? (priceDiscount(props.price_current, props.discount_percent)) : new Intl.NumberFormat().format(props.price_current)}</div>
+                    {props.discount_percent ? <div className="card__discount">{new Intl.NumberFormat().format(props.price_current)}</div> : null}
                 </div>
                 <div className="cardBtnContainer">
                     <button className="card__btn" onClick={() => setOpenDialogCart(true)}><AddShoppingCart /></button>
                 </div>
             </div>
+            {props.is_new ? (<div className="circle-notify">
+                <span>NEW</span>
+            </div>) : null}
+            {props.discount_percent ? <div className="discount-notify">
+                <span>{props.discount_percent}</span>
+            </div> : null}
             <CustomizedDialogs open={openDialogCart}
                 setOpen={setOpenDialogCart}
-                price={props.price}
-                priceDiscount={props.priceDiscount}
+                price_discount={props.discount_percent ? (priceDiscount(props.price_current, props.discount_percent)) : new Intl.NumberFormat().format(props.price_current)}
+                price_current={props.discount_percent ? new Intl.NumberFormat().format(props.price_current) : null}
                 title={props.title}>
-                <AddCartDetail price={props.price} />
+                <AddCartDetail id_product={props.id} />
             </CustomizedDialogs>
         </div>
     )

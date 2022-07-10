@@ -9,6 +9,9 @@
     color: #f30c28;
     margin-right: 15px;
 }
+.price::after,.priceDiscount::after{
+    content: 'đ';
+}
 .priceDiscount{
     text-decoration: line-through;
     color: gray;

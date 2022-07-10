@@ -1,5 +1,7 @@
 .navbar-design{
-
+    height: 100%;
+    width: 100%;
+    padding-top: 15px;
 }
 
 .navbar-design .me-auto a{

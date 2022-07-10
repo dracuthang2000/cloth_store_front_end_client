@@ -5,20 +5,22 @@
     height: 50px;
 }
 .content {
-    /* padding: 10px 0 10px 0; */
     border-bottom: 1px solid gainsboro;
     margin-bottom: 0px;
-    z-index: 1999;
-    position: relative;
+    width: 100%;
+    z-index: 999;
+    position: fixed;
     background: #111 !important;
     box-shadow: rgba(50, 50, 93,0.23) 0 30px 30px -20px;
 }
-.container-header{
+/* .container-header{
     height: 80px;
     line-height: 80px;
     box-shadow: rgba(50, 50, 93,0.23) 0 30px 30px -20px;
-}
+} */
 .navigateBar{
     align-self: center;
+    height: 100%;
+    width: 100%;
     margin-top: 0;
 }
