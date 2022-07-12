@@ -85,13 +85,18 @@ body{
     position: relative;
     left: 0px;
 }
-.design-new{
+.design{
     border-radius: 10px;
-    background-color: rgba(51, 197, 246, 0.868);
     padding-left: 25px;
     padding-bottom: 20px;
     padding-top: 0px;
     padding-right: 0;
+}
+.new{
+    background-color: rgba(51, 197, 246, 0.868);
+}
+.seller{
+    background-color: #FED201;
 }
 .btn-seeMore{
     padding-top: 20px;

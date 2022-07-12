@@ -3,7 +3,9 @@ import { AddShoppingCart } from '@mui/icons-material'
 import './style/CardItem.css';
 import CustomizedDialogs from "./CustomDialog";
 import AddCartDetail from "./AddCartDetail";
+import { Link, useNavigate } from "react-router-dom";
 const Card = (props: any) => {
+    const navigate = useNavigate();
     const [openDialogCart, setOpenDialogCart] = useState(false);
     const priceDiscount = (price: any, discount_percent: any) => {
         const priceAfterDiscount = price - ((price * discount_percent) / 100);
@@ -13,8 +15,8 @@ const Card = (props: any) => {
         <div className="card-item" title={props.title}>
             <img src={props.img} className="card__img" />
             <div className="card__body">
-                <div className="card__title">
-                    <span>{props.title}</span>
+                <div className="card__title" >
+                    <span onClick={() => { navigate(`/shop/${props.tag_label}/${props.tag}`) }}>{props.title}</span>
                 </div>
                 <div className="priceContainer">
                     <div className="card__price">{props.discount_percent ? (priceDiscount(props.price_current, props.discount_percent)) : new Intl.NumberFormat().format(props.price_current)}</div>

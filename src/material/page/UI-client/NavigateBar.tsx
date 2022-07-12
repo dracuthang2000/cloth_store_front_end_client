@@ -3,6 +3,7 @@ import { Nav } from "react-bootstrap";
 import { FaSearch, FaUser, FaShoppingCart } from 'react-icons/fa'
 import { ExpandMore, Search } from '@mui/icons-material'
 import { Row, Col, Container, Form } from 'react-bootstrap'
+import { Link } from "react-router-dom";
 import './style/Navigate.css'
 import CustomizedDialogs from "./CustomDialog";
 
@@ -16,8 +17,8 @@ const Navigate = () => {
             <Row>
                 <Col xl={5}>
                     <Nav className="me-auto">
-                        <Nav.Link style={{ paddingTop: '0px' }} href="#home">HOME</Nav.Link>
-                        <Nav.Link style={{ paddingTop: '0px' }} href="#features">PRODUCT</Nav.Link>
+                        <Nav.Link style={{ paddingTop: '0px' }} as={Link} to={'/'}>HOME</Nav.Link>
+                        <Nav.Link style={{ paddingTop: '0px' }} as={Link} to={'/error'}>PRODUCT</Nav.Link>
                         <Nav.Link style={{ paddingTop: '0px' }} href="#pricing">GENDER<ExpandMore /></Nav.Link>
                         <Nav.Link style={{ paddingTop: '0px' }} href="#pricing">LABEL <ExpandMore /></Nav.Link>
                     </Nav>

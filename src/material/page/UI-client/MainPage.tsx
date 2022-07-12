@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
 import Error from './Error';
 import NavigateHeader from './Header';
 import ScreenCard from './ScreenShowCard';
@@ -12,14 +12,12 @@ const MainPage = () => {
                 <NavigateHeader />
             </div>
             <Container fluid style={{ paddingTop: '80px' }}>
-                <BrowserRouter>
-                    <Row>
-                        <Routes>
-                            <Route path='/error' element={<Error />} />
-                            <Route path='/' element={<ScreenCard />} />
-                        </Routes>
-                    </Row>
-                </BrowserRouter>
+                <Row>
+                    <Routes>
+                        <Route path='/shop/:tag_label/:tag' element={<Error />} />
+                        <Route path='/' element={<ScreenCard />} />
+                    </Routes>
+                </Row>
             </Container>
         </div>)
 }

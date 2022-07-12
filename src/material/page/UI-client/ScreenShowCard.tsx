@@ -31,6 +31,9 @@ function SamplePrevArrow(props: any) {
 };
 const ScreenCard = () => {
   const [products, setProducts] = useState([]);
+  const [productsIsNew, setProductsIsNew] = useState([]);
+  const [productsDiscount, setProductsDiscount] = useState([]);
+
   const slickRef = useRef(null);
   console.log(slickRef.current);
   useEffect(() => {
@@ -46,10 +49,58 @@ const ScreenCard = () => {
               price_current: p.price,
               is_new: p.is_new,
               discount_percent: p.discount,
+              tag: p.tag,
+              tag_label: p.label.tag_label,
             };
           })
         );
-        console.log(products);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  useEffect(() => {
+    Axios.get('product/get-list-product-new')
+      .then((res) => {
+        const listProduct = res.data;
+        setProductsIsNew(
+          listProduct.map((p: any) => {
+            return {
+              id: p.id,
+              img: p.img,
+              title: p.product_name,
+              price_current: p.price,
+              is_new: p.is_new,
+              discount_percent: p.discount,
+              tag: p.tag,
+              tag_label: p.label.tag_label,
+            };
+          })
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  useEffect(() => {
+    Axios.get('product/get-list-product-discount')
+      .then((res) => {
+        const listProduct = res.data;
+        setProductsDiscount(
+          listProduct.map((p: any) => {
+            return {
+              id: p.id,
+              img: p.img,
+              title: p.product_name,
+              price_current: p.price,
+              is_new: p.is_new,
+              discount_percent: p.discount,
+              tag: p.tag,
+              tag_label: p.label.tag_label
+              ,
+            };
+          })
+        );
       })
       .catch((error) => {
         console.log(error);
@@ -58,21 +109,53 @@ const ScreenCard = () => {
   return (
     <Container>
       <div className='container'>
-        <div className='design-new'>
+        <div className='design new'>
           <div className='clearfix'>
             <strong className='design-title'>
               New clothes
             </strong>
           </div>
           <Slider
-            infinite={true}
+            infinite={(productsIsNew.length > 5)}
             slidesToShow={5}
             slidesToScroll={1}
             nextArrow={<SampleNextArrow />}
             prevArrow={<SamplePrevArrow />}
           >
-            {products.map((p: any) => p.is_new ? (
-              <CardItem
+            {productsIsNew.map((p: any) =>
+            (<CardItem
+              key={p.id}
+              img={require('../../image/' + p.img)}
+              title={p.title}
+              discount_percent={p.discount_percent ? (p.discount_percent.percent) : null}
+              price_current={p.price_current}
+              is_new={p.is_new}
+              id={p.id}
+              tag={p.tag}
+              tag_label={p.tag_label}
+            />))}
+          </Slider>
+          <div className='btn-seeMore'>
+            <Button title='see more'>See more</Button>
+          </div>
+        </div>
+      </div>
+      <div className='container'>
+        <div className='design seller'>
+          <div className='clearfix'>
+            <strong className='design-title'>
+              Best seller
+            </strong>
+          </div>
+          <Slider
+            infinite={productsDiscount.length > 5}
+            slidesToShow={5}
+            slidesToScroll={1}
+            nextArrow={<SampleNextArrow />}
+            prevArrow={<SamplePrevArrow />}
+          >
+            {productsDiscount.map((p: any) => p.discount_percent ?
+              (<CardItem
                 key={p.id}
                 img={require('../../image/' + p.img)}
                 title={p.title}
@@ -80,8 +163,9 @@ const ScreenCard = () => {
                 price_current={p.price_current}
                 is_new={p.is_new}
                 id={p.id}
-              />
-            ) : null)}
+                tag={p.tag}
+                tag_label={p.tag_label}
+              />) : null)}
           </Slider>
           <div className='btn-seeMore'>
             <Button title='see more'>See more</Button>
@@ -102,6 +186,8 @@ const ScreenCard = () => {
               price_current={p.price_current}
               is_new={p.is_new}
               id={p.id}
+              tag={p.tag}
+              tag_label={p.tag_label}
             />
           ))}
         </div>
