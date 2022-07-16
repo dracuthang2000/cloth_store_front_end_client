@@ -31,11 +31,8 @@ function SamplePrevArrow(props: any) {
 };
 const ScreenCard = () => {
   const [products, setProducts] = useState([]);
-  const [productsIsNew, setProductsIsNew] = useState([]);
+  const [newProducts, setNewProducts] = useState([]);
   const [productsDiscount, setProductsDiscount] = useState([]);
-
-  const slickRef = useRef(null);
-  console.log(slickRef.current);
   useEffect(() => {
     Axios.get('product/get-list-product')
       .then((res) => {
@@ -63,7 +60,7 @@ const ScreenCard = () => {
     Axios.get('product/get-list-product-new')
       .then((res) => {
         const listProduct = res.data;
-        setProductsIsNew(
+        setNewProducts(
           listProduct.map((p: any) => {
             return {
               id: p.id,
@@ -83,7 +80,7 @@ const ScreenCard = () => {
       });
   }, []);
   useEffect(() => {
-    Axios.get('product/get-list-product-discount')
+    Axios.get('product/get-list-product-discount') // best seller
       .then((res) => {
         const listProduct = res.data;
         setProductsDiscount(
@@ -116,13 +113,13 @@ const ScreenCard = () => {
             </strong>
           </div>
           <Slider
-            infinite={(productsIsNew.length > 5)}
+            infinite={(newProducts.length > 5)}
             slidesToShow={5}
             slidesToScroll={1}
             nextArrow={<SampleNextArrow />}
             prevArrow={<SamplePrevArrow />}
           >
-            {productsIsNew.map((p: any) =>
+            {newProducts.map((p: any) =>
             (<CardItem
               key={p.id}
               img={require('../../image/' + p.img)}
