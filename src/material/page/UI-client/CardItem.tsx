@@ -1,11 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AddShoppingCart } from '@mui/icons-material'
 import './style/CardItem.css';
 import CustomizedDialogs from "./CustomDialog";
 import AddCartDetail from "./AddCartDetail";
 import { Link, useNavigate } from "react-router-dom";
+interface cart {
+    name: '',
+    afterDiscountPrice: '',
+    beforeDiscountPrice: '',
+    id_product_color_size: ''
+    quantity: '',
+    color: '',
+    size: ''
+};
 const Card = (props: any) => {
     const navigate = useNavigate();
+    const [shoppingCart, setShoppingCart] = useState<Partial<cart>>({})
     const [openDialogCart, setOpenDialogCart] = useState(false);
     const priceDiscount = (price: any, discount_percent: any) => {
         const priceAfterDiscount = price - ((price * discount_percent) / 100);
@@ -33,11 +43,14 @@ const Card = (props: any) => {
                 <span>{props.discount_percent}</span>
             </div> : null}
             <CustomizedDialogs open={openDialogCart}
+                shoppingCart={shoppingCart}
                 setOpen={setOpenDialogCart}
+                setShoppingCart={setShoppingCart}
+                handleClick={props.handleClick}
                 price_discount={props.discount_percent ? (priceDiscount(props.price_current, props.discount_percent)) : new Intl.NumberFormat().format(props.price_current)}
                 price_current={props.discount_percent ? new Intl.NumberFormat().format(props.price_current) : null}
                 title={props.title}>
-                <AddCartDetail id_product={props.id} />
+                <AddCartDetail id_product={props.id} shoppingCart={shoppingCart} setShoppingCart={setShoppingCart} />
             </CustomizedDialogs>
         </div>
     )

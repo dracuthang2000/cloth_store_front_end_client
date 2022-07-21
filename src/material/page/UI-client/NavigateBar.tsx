@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Nav } from "react-bootstrap";
 import { FaSearch, FaUser, FaShoppingCart } from 'react-icons/fa'
 import { ExpandMore, Search } from '@mui/icons-material'
@@ -9,9 +9,11 @@ import CustomizedDialogs from "./CustomDialog";
 
 
 
-const Navigate = () => {
+const Navigate = (props: any) => {
     const [showSearch, setShowSearch] = useState(false);
     const [showUser, setShowUser] = useState(false);
+    useEffect(() => {
+    }, [props.size])
     return (
         <div className="navbar-design">
             <Row>
@@ -24,7 +26,7 @@ const Navigate = () => {
                     </Nav>
                 </Col>
                 <Col xl={3}>
-                    {showSearch ? (<input className="form-control" style={{ position: 'absolute', top: '5px', width: '330px' }} placeholder={"search clothes ..."}></input>) : <></>}
+                    {showSearch ? (<input className="form-control" style={{ position: 'absolute', top: '25px', width: '330px' }} placeholder={"search clothes ..."}></input>) : <></>}
                 </Col>
                 <Col xl={4}>
                     <Nav className="me-auto">
@@ -39,7 +41,15 @@ const Navigate = () => {
                         </Nav.Link>
                         <Nav.Link style={{ paddingTop: '0px' }} onClick={() => { setShowUser(true) }}><FaUser /></Nav.Link>
                         <CustomizedDialogs open={showUser} setOpen={setShowUser} title={'Login'}>Hey</CustomizedDialogs>
-                        <Nav.Link style={{ paddingTop: '0px' }} href="#pricing"><FaShoppingCart /></Nav.Link>
+                        <Nav.Link style={{ paddingTop: '0px' }} href="#pricing">
+                            <div className="containerCart">
+                                <FaShoppingCart />
+                                {props.size > 0 ?
+                                    <div className="iconCount">
+                                        <span>{props.size}</span>
+                                    </div> : <></>}
+                            </div>
+                        </Nav.Link>
                     </Nav>
                 </Col>
             </Row>

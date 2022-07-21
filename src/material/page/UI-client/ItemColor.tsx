@@ -8,7 +8,7 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const ItemColor = (props: any) => {
     const handleClickCheckBox = () => {
         props.setIsCheck(() => {
-            return { check: true, id: props.id };
+            return { check: true, id: props.colorId };
         });
         loadSize();
     }

@@ -29,7 +29,7 @@ function SamplePrevArrow(props: any) {
     ><ArrowBackIos style={{ fontSize: '24px', color: 'black' }} /></div>
   );
 };
-const ScreenCard = () => {
+const ScreenCard = (props: any) => {
   const [products, setProducts] = useState([]);
   const [newProducts, setNewProducts] = useState([]);
   const [productsDiscount, setProductsDiscount] = useState([]);
@@ -129,7 +129,9 @@ const ScreenCard = () => {
               is_new={p.is_new}
               id={p.id}
               tag={p.tag}
+              cart={props.cart}
               tag_label={p.tag_label}
+              handleClick={props.handleClick}
             />))}
           </Slider>
           <div className='btn-seeMore'>
@@ -161,7 +163,9 @@ const ScreenCard = () => {
                 is_new={p.is_new}
                 id={p.id}
                 tag={p.tag}
+                cart={props.cart}
                 tag_label={p.tag_label}
+                handleClick={props.handleClick}
               />) : null)}
           </Slider>
           <div className='btn-seeMore'>
@@ -185,6 +189,8 @@ const ScreenCard = () => {
               id={p.id}
               tag={p.tag}
               tag_label={p.tag_label}
+              cart={props.cart}
+              handleClick={props.handleClick}
             />
           ))}
         </div>

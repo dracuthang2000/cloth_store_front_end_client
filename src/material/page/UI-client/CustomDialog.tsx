@@ -54,6 +54,13 @@ export default function CustomizedDialogs(props: any) {
     const handleClose = () => {
         props.setOpen(false);
     };
+    const handleAdd = () => {
+        props.shoppingCart.afterDiscountPrice = props.price_discount;
+        props.shoppingCart.beforeDiscountPrice = props.price_current;
+        props.shoppingCart.name = props.title;
+        props.handleClick(props.shoppingCart);
+        props.setOpen(false);
+    }
 
     return (
         <div>
@@ -81,7 +88,7 @@ export default function CustomizedDialogs(props: any) {
                     </Typography>
                 </DialogContent>
                 <DialogActions style={{ justifyContent: 'center' }}>
-                    <Button id='btn-add' style={{ width: '80%' }} autoFocus onClick={handleClose}>
+                    <Button id='btn-add' style={{ width: '80%' }} autoFocus onClick={handleAdd}>
                         ADD
                     </Button>
                 </DialogActions>

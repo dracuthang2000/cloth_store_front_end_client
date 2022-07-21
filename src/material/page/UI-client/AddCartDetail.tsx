@@ -5,27 +5,19 @@ import Axios from '../../Axios';
 import './style/AddCartDetail.css'
 import ItemColor from './ItemColor';
 import ItemSize from './ItemSize'
+
 const AddCartDetail = (props: any) => {
-    const arr = [
-        { id: '1', img: require('../../image/clothing.png'), color: 'white', select: true },
-        { id: '2', img: require('../../image/clothing.png'), color: 'Green', select: false },
-        { id: '3', img: require('../../image/clothing.png'), color: 'Red', select: false },
-        { id: '4', img: require('../../image/clothing.png'), color: 'Blue', select: false },
-    ]
-    const arrSize = [
-        { id: '1', size: 'XS', quantity: 100, select: true },
-        { id: '2', size: 'S', quantity: 95, select: false },
-        { id: '3', size: 'M', quantity: 1000, select: false },
-        { id: '4', size: 'L', quantity: 50, select: false },
-        { id: '5', size: 'XL', quantity: 60, select: false },
-        { id: '6', size: 'XXL', quantity: 10, select: false }];
     const [colors, setColors] = useState([] as any);
     const [sizes, setSizes] = useState([] as any);
     const [quantity, setQuantity] = useState(1);
-    const [isCheck, setIsCheck] = useState({ check: false, id: '' });
+    const [isCheckColor, setIsCheckColor] = useState({ check: false, id: '' });
     const [isSelectSize, setIsSelectSize] = useState({ select: false, id: '', quantity: 0 })
     const [quantityClotheIsSelect, setQuantityClotheIsSelect] = useState(0);
     useEffect(() => {
+        props.setShoppingCart({ ...props.shoppingCart, quantity_cart: quantity })
+    }, [quantity])
+    useEffect(() => {
+        console.log(props.id_product);
         Axios.get('product/get-product-by-id?id= ' + props.id_product)
             .then((res) => {
                 const Product = res.data;
@@ -33,7 +25,8 @@ const AddCartDetail = (props: any) => {
                 let index = 0;
                 Product.color.map((c: any) => {
                     tempArr[index] = {
-                        id: c.color.id,
+                        id: c.id,
+                        colorId: c.color.id,
                         img: c.img,
                         color: c.color.color,
                         select: false
@@ -69,7 +62,6 @@ const AddCartDetail = (props: any) => {
         if (flag && isSelectSize.id !== '') {
             setQuantity(0);
         }
-
     }
     const handleIncrease = () => {
         setQuantityClothe()
@@ -94,10 +86,14 @@ const AddCartDetail = (props: any) => {
         });
     }
     useEffect(() => {
-        if (isCheck.id !== '') {
+        if (isCheckColor.id !== '') {
             setColors(
                 colors.map((color: any) => {
-                    if (color.id === isCheck.id && isCheck.check === true) {
+                    if (color.colorId === isCheckColor.id && isCheckColor.check === true) {
+                        props.setShoppingCart({
+                            ...props.shoppingCart,
+                            color: color.color
+                        });
                         color.select = true;
                     } else {
                         color.select = false;
@@ -107,13 +103,19 @@ const AddCartDetail = (props: any) => {
             )
         }
         setQuantityClothe()
-    }, [isCheck]);
+    }, [isCheckColor]);
     useEffect(() => {
         if (isSelectSize.id !== '' && isSelectSize.quantity !== 0) {
             setSizes(
                 sizes.map((size: any) => {
                     if (size.id === isSelectSize.id) {
                         size.select = isSelectSize.select;
+                        props.setShoppingCart({
+                            ...props.shoppingCart,
+                            id_product_color_size: size.id,
+                            quantity_cart: quantity,
+                            size: size.size
+                        });
                     } else {
                         size.select = false;
                     }
@@ -132,11 +134,13 @@ const AddCartDetail = (props: any) => {
                 <div className='wrapper-item-color'>
                     {colors.map((color: any) => (
                         <ItemColor
+                            key={color.id}
                             id={color.id}
+                            colorId={color.colorId}
                             img={require('../../image/' + color.img)}
                             color={color.color}
                             isCheck={color.select}
-                            setIsCheck={setIsCheck}
+                            setIsCheck={setIsCheckColor}
                             setSizes={setSizes}
                             setIsSelectSize={setIsSelectSize}
                         />
@@ -151,6 +155,7 @@ const AddCartDetail = (props: any) => {
                 <div className='wrapper-item-color'>
                     {sizes.map((s: any) => (
                         <ItemSize
+                            key={s.id}
                             id={s.id}
                             size={s.size}
                             quantity={s.quantity}
