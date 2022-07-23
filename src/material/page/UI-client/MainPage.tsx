@@ -16,6 +16,7 @@ interface CartTP {
 };
 const MainPage = () => {
     const [cart, setCart] = useState<CartTP[]>([])
+    const [accessToken, setAccessToken] = useState(localStorage.getItem('accessToken'));
     useEffect(() => {
         if (cart.length !== 0) {
             localStorage.setItem('cart', JSON.stringify(cart));
@@ -42,14 +43,14 @@ const MainPage = () => {
     return (
         <div className="main">
             <div>
-                <NavigateHeader size={cart.length} cart={cart} />
+                <NavigateHeader size={cart.length} cart={cart} accessToken={accessToken} setAccessToken={setAccessToken} />
             </div>
             <Container fluid style={{ paddingTop: '80px' }}>
                 <Row>
                     <Routes>
                         <Route path='/shop/:tag_label/:tag' element={<Error />} />
                         <Route path='/' element={<ScreenCard handleClick={handleClick} />} />
-                        <Route path='/cart' element={<CartDetail />} />
+                        <Route path='/cart' element={<CartDetail setAccessToken={setAccessToken} />} />
                     </Routes>
                 </Row>
             </Container>

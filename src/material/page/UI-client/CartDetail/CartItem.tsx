@@ -48,7 +48,9 @@ const CartItem = (props: any) => {
                 </div>
                 <div className="bottom">
                     <div className="priceAfterDiscount"><span>{new Intl.NumberFormat().format(props.item.afterDiscountPrice)}</span></div>
-                    <div className="priceBeforeDiscount"><span>{new Intl.NumberFormat().format(props.item.beforeDiscountPrice)}</span></div>
+                    {props.item.afterDiscountPrice !== props.item.beforeDiscountPrice ?
+                        <div className="priceBeforeDiscount"><span>{new Intl.NumberFormat().format(props.item.beforeDiscountPrice)}</span></div> : <></>
+                    }
                 </div>
             </div>
             <div className="right">

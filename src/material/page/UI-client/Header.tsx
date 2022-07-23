@@ -16,7 +16,10 @@ const Header = (props: any) => {
                         <img className="logo" src={logo} alt='logo' style={{ cursor: 'pointer' }} />
                     </Link>
                 </Col>
-                <Col xl={10}><div className="navigateBar"><NavigateBar size={props.size} cart={props.cart} /></div></Col>
+                <Col xl={10}><div className="navigateBar"><NavigateBar size={props.size}
+                    cart={props.cart}
+                    accessToken={props.accessToken}
+                    setAccessToken={props.setAccessToken} /></div></Col>
             </Row>
         </div>
     )

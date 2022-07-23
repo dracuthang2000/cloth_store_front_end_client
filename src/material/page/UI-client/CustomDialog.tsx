@@ -74,10 +74,10 @@ export default function CustomizedDialogs(props: any) {
                     <Row>
                         <Col>
                             <span className='price'>
-                                {props.price_discount}
+                                {new Intl.NumberFormat().format(props.price_discount ? props.price_discount : props.price_current)}
                             </span>
-                            {props.price_current ? <span className='priceDiscount'>
-                                {props.price_current}
+                            {props.price_discount ? <span className='priceDiscount'>
+                                {new Intl.NumberFormat().format(props.price_current)}
                             </span> : null}
                         </Col>
                     </Row>

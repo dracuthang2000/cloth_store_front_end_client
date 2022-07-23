@@ -19,7 +19,7 @@ const Card = (props: any) => {
     const [openDialogCart, setOpenDialogCart] = useState(false);
     const priceDiscount = (price: any, discount_percent: any) => {
         const priceAfterDiscount = price - ((price * discount_percent) / 100);
-        return new Intl.NumberFormat().format(priceAfterDiscount);
+        return priceAfterDiscount;
     }
     return (
         <div className="card-item" title={props.title}>
@@ -29,7 +29,7 @@ const Card = (props: any) => {
                     <span onClick={() => { navigate(`/shop/${props.tag_label}/${props.tag}`) }}>{props.title}</span>
                 </div>
                 <div className="priceContainer">
-                    <div className="card__price">{props.discount_percent ? (priceDiscount(props.price_current, props.discount_percent)) : new Intl.NumberFormat().format(props.price_current)}</div>
+                    <div className="card__price">{props.discount_percent ? (new Intl.NumberFormat().format(priceDiscount(props.price_current, props.discount_percent))) : new Intl.NumberFormat().format(props.price_current)}</div>
                     {props.discount_percent ? <div className="card__discount">{new Intl.NumberFormat().format(props.price_current)}</div> : null}
                 </div>
                 <div className="cardBtnContainer">
@@ -47,8 +47,8 @@ const Card = (props: any) => {
                 setOpen={setOpenDialogCart}
                 setShoppingCart={setShoppingCart}
                 handleClick={props.handleClick}
-                price_discount={props.discount_percent ? (priceDiscount(props.price_current, props.discount_percent)) : new Intl.NumberFormat().format(props.price_current)}
-                price_current={props.discount_percent ? new Intl.NumberFormat().format(props.price_current) : null}
+                price_discount={props.discount_percent ? (priceDiscount(props.price_current, props.discount_percent)) : null}
+                price_current={props.price_current}
                 title={props.title}>
                 <AddCartDetail id_product={props.id} shoppingCart={shoppingCart} setShoppingCart={setShoppingCart} />
             </CustomizedDialogs>

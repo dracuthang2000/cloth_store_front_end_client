@@ -5,8 +5,9 @@ import BpCheckbox from "./BbCheckBox";
 import './CardDetail.css'
 import CartItem from "./CartItem";
 import { Delete } from "@mui/icons-material";
+import LoginDialog from "../login/LoginDialog";
 
-const CartDetail = () => {
+const CartDetail = (props: any) => {
     const items = [
         { id: 1, afterDiscountPrice: 200000, beforeDiscountPrice: 150000, name: 'test', quantity: 10, size: 'XXL', color: 'red', img: require('../../../image/clothing.png'), select: false },
         { id: 2, afterDiscountPrice: 200000, beforeDiscountPrice: 150000, name: 'test', quantity: 10, size: 'XXL', color: 'black', img: require('../../../image/clothing.png'), select: false },
@@ -17,6 +18,7 @@ const CartDetail = () => {
     const [productIsChoose, setProductIsChoose] = useState(0);
     const [total, setTotal] = useState(0);
     const [selectAll, setSelectAll] = useState(false);
+    const [checkLogin, setCheckLogin] = useState(false);
     const handleSelectItem = (item: any) => {
         setCartItems(cartItems.map((data: any) => {
             if (item.id === data.id) {
@@ -75,6 +77,11 @@ const CartDetail = () => {
         setCartItems(cartItems.filter((data: any) => data.id !== item.id));
         setProductIsChoose(productIsChoose > 0 ? productIsChoose - 1 : productIsChoose);
     }
+    const handleBuy = () => {
+        if (localStorage.getItem('accessToken') === null) {
+            setCheckLogin(true);
+        }
+    }
     return (
         <Container>
             <div id='cartDetailContainer'>
@@ -112,7 +119,8 @@ const CartDetail = () => {
                             <div></div>
                         </div>
                         <div className="btn">
-                            <Button variant="contained" style={{ backgroundColor: 'orange', width: '100px', textAlign: 'center' }}>BUY</Button>
+                            <Button variant="contained" onClick={handleBuy} style={{ backgroundColor: 'orange', width: '100px', textAlign: 'center' }}>BUY</Button>
+                            <LoginDialog open={checkLogin} setOpen={setCheckLogin} title={'Login'} setAccessToken={props.setAccessToken} />
                         </div>
                     </div>
                 </div>
