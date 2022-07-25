@@ -42,6 +42,7 @@ body{
     flex-direction: column;
     justify-content: space-between;
     border: 1px solid rgba(0,0,0,.125);
+    background-color: white;
 }
 #cartDetailContainer .navBarCartDetail .nav-item{
     width: 100%;

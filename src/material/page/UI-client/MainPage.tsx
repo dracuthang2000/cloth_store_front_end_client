@@ -5,6 +5,7 @@ import CartDetail from './CartDetail/CartDetail';
 import Error from './Error';
 import NavigateHeader from './Header';
 import ScreenCard from './ScreenShowCard';
+import DeliveryState from './delivery/DeliveryState';
 interface CartTP {
     name: '',
     afterDiscountPrice: '',
@@ -51,6 +52,7 @@ const MainPage = () => {
                         <Route path='/shop/:tag_label/:tag' element={<Error />} />
                         <Route path='/' element={<ScreenCard handleClick={handleClick} />} />
                         <Route path='/cart' element={<CartDetail setAccessToken={setAccessToken} />} />
+                        <Route path='/order/delivery-status' element={<DeliveryState />} />
                     </Routes>
                 </Row>
             </Container>
