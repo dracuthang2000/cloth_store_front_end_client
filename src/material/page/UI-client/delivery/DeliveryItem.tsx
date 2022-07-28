@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './DeliveryItem.css'
 import { LocalShipping, HelpOutlineOutlined, PaidOutlined } from '@mui/icons-material'
-import { Button } from "@mui/material";
+import { Button, Tooltip } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Axios from "../../../Axios";
 function Items(props: any) {
@@ -51,7 +51,12 @@ const DeliveryItem = (props: any) => {
                                     props.item.state === 'DEL' ? 'Order is delivering' :
                                         'Order is canceling'}</span>
                         </div>
-                        <span><HelpOutlineOutlined titleAccess={`Date: ${props.item.date}`} style={{ paddingLeft: '5px', fontSize: '22px' }} />|</span>
+                        <span>
+                            <Tooltip title={`Date: ${props.item.date}`} arrow>
+                                <HelpOutlineOutlined style={{ paddingLeft: '5px', fontSize: '22px' }} />
+                            </Tooltip>
+                            |
+                        </span>
                         <span className="status">{
                             props.item.state === 'PRO' ? 'PROCESSING' :
                                 props.item.state === 'FIN' ? 'FINISHING' :
