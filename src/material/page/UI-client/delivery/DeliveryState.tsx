@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import { Tab, Tabs, Typography } from "@mui/material";
 import './DeliveryState.css';
 import DeliveryItem from './DeliveryItem';
+import Axios from '../../../Axios';
 interface TabPanelProps {
     children?: React.ReactNode;
     index: number;
@@ -31,7 +32,64 @@ function TabPanel(props: TabPanelProps) {
 
 export default function CenteredTabs() {
     const [value, setValue] = useState(0);
-
+    const bill = {
+        id: '',
+        date: '',
+        note: '',
+        total: 0,
+        state: '',
+        receiver: {
+            first_name: '',
+            last_name: '',
+            phone_number: '',
+            address: '',
+            mail: ''
+        },
+        bill_product_details: [
+            {
+                id: '',
+                quantity: 0,
+                version: 0,
+                unit_price: 1000,
+                product_color_size: {
+                    id: '',
+                    size: {
+                        size: '',
+                    },
+                    color: {
+                        color: {
+                            color: '',
+                        },
+                        product: {
+                            id: '',
+                            description: '',
+                            product_name: '',
+                            stuff: '',
+                            label: '',
+                            gender: '',
+                            brand: '',
+                        },
+                        img: ''
+                    }
+                }
+            },
+        ],
+        id_customer: ''
+    }
+    const [bills, setBills] = useState([bill])
+    useEffect(() => {
+        Axios.get("customer/bill/bill-by-me", {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("accessToken")}`
+            }
+        })
+            .then(res => {
+                let billTemp = res.data;
+                setBills(billTemp);
+            }).catch(error => {
+                console.log(error);
+            })
+    }, [])
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
@@ -50,27 +108,19 @@ export default function CenteredTabs() {
                 </div>
                 <div className='tab-details'>
                     <TabPanel value={value} index={0}>
-                        <DeliveryItem />
-                        <DeliveryItem />
-                        <DeliveryItem />
-                        <DeliveryItem />
-                        <DeliveryItem />
+                        {bills.map((item) => <DeliveryItem item={item} />)}
                     </TabPanel>
                     <TabPanel value={value} index={1}>
-                        <DeliveryItem />
-                        <DeliveryItem />
-                        <DeliveryItem />
-                        <DeliveryItem />
-                        <DeliveryItem />
+                        {bills.map((item) => item.state === 'PRO' ? <DeliveryItem item={item} /> : <></>)}
                     </TabPanel>
                     <TabPanel value={value} index={2}>
-                        Item Two
+                        {bills.map((item) => item.state === 'DEL' ? <DeliveryItem item={item} /> : <></>)}
                     </TabPanel>
                     <TabPanel value={value} index={3}>
-                        Item Three
+                        {bills.map((item) => item.state === 'FIN' ? <DeliveryItem item={item} /> : <></>)}
                     </TabPanel>
                     <TabPanel value={value} index={4}>
-                        Item Four
+                        {bills.map((item) => item.state === 'CAN' ? <DeliveryItem item={item} /> : <></>)}
                     </TabPanel>
                 </div>
             </div>
