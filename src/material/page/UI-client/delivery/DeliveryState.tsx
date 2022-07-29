@@ -31,7 +31,7 @@ function TabPanel(props: TabPanelProps) {
 }
 
 export default function CenteredTabs() {
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState(sessionStorage.getItem('valueTabOrder') ? parseInt(sessionStorage.getItem('valueTabOrder')!) : 0);
     const bill = {
         id: '',
         date: '',
@@ -92,6 +92,7 @@ export default function CenteredTabs() {
     }, [])
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
+        sessionStorage.setItem('valueTabOrder', newValue.toString());
     };
 
     return (
