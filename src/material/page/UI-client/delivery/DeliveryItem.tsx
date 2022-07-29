@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import './DeliveryItem.css'
 import { LocalShipping, HelpOutlineOutlined, PaidOutlined } from '@mui/icons-material'
 import { Button, Tooltip } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import Axios from "../../../Axios";
 function Items(props: any) {
     return (
         <div className="main">
