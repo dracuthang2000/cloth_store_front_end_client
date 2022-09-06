@@ -38,6 +38,9 @@ const DeliveryItem = (props: any) => {
             }
         });
     }
+    const handelCanceling = ()=>{
+        
+    }
     return (
         <div className="container-delivery-card">
             <div className="card-deliver">
@@ -83,7 +86,7 @@ const DeliveryItem = (props: any) => {
                 </div>
                 <div className="left">
                     <Button style={{ backgroundColor: '#ee4d2d', color: 'white' }}>BUY AGAIN</Button>
-                    {props.item.state === 'PRO' && <Button>CANCELING</Button>}
+                    {props.item.state === 'PRO' && <Button onClick={handelCanceling}>CANCELING</Button>}
                     <Button onClick={handleClickDetail}>ORDER DETAIL</Button>
                 </div>
             </div>
