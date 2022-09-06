@@ -2,8 +2,10 @@ import { TextField, FormControl, FormHelperText, InputLabel } from "@mui/materia
 import React, { useEffect, useState } from "react";
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import './Login.css'
+import { useNavigate } from "react-router-dom";
 const Login = (props: any) => {
     const [hiddenPassword, setHiddenPassword] = useState(true);
+    const navigate = useNavigate();
     const handleChange = (value: any) => {
         props.setUser({ ...props.user, [value.target.name]: value.target.value.trim() });
     }
@@ -37,7 +39,9 @@ const Login = (props: any) => {
                 </div>
                 <div className="bottom-login">
                     <div><span onClick={() => { props.setOpen(false) }}>Forget password</span></div>
-                    <div><span>Don't have an account?</span></div>
+                    <div><span onClick={() => {
+                        navigate('/sign-up');
+                    }}>Don't have an account?</span></div>
                 </div>
             </div>
         </div>

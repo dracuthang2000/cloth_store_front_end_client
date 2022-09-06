@@ -32,7 +32,7 @@ function SamplePrevArrow(props: any) {
 const ScreenCard = (props: any) => {
   const [products, setProducts] = useState([]);
   const [newProducts, setNewProducts] = useState([]);
-  const [productsDiscount, setProductsDiscount] = useState([]);
+  const [productBestSeller, setProductBestSeller] = useState([]);
   useEffect(() => {
     Axios.get('product/get-list-product')
       .then((res) => {
@@ -80,10 +80,11 @@ const ScreenCard = (props: any) => {
       });
   }, []);
   useEffect(() => {
-    Axios.get('product/get-list-product-discount') // best seller
+    Axios.get('product/get-top-five-best-seller-product') // best seller
       .then((res) => {
         const listProduct = res.data;
-        setProductsDiscount(
+        console.log(listProduct);
+        setProductBestSeller(
           listProduct.map((p: any) => {
             return {
               id: p.id,
@@ -122,7 +123,7 @@ const ScreenCard = (props: any) => {
             {newProducts.map((p: any) =>
             (<CardItem
               key={p.id}
-              img={require('../../image/' + p.img)}
+              img={p.img}
               title={p.title}
               discount_percent={p.discount_percent ? (p.discount_percent.percent) : null}
               price_current={p.price_current}
@@ -134,9 +135,9 @@ const ScreenCard = (props: any) => {
               handleClick={props.handleClick}
             />))}
           </Slider>
-          <div className='btn-seeMore'>
+          {/* <div className='btn-seeMore'>
             <Button title='see more'>See more</Button>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className='container'>
@@ -147,30 +148,27 @@ const ScreenCard = (props: any) => {
             </strong>
           </div>
           <Slider
-            infinite={productsDiscount.length > 5}
+            infinite={productBestSeller.length > 5}
             slidesToShow={5}
             slidesToScroll={1}
             nextArrow={<SampleNextArrow />}
             prevArrow={<SamplePrevArrow />}
           >
-            {productsDiscount.map((p: any) => p.discount_percent ?
-              (<CardItem
-                key={p.id}
-                img={require('../../image/' + p.img)}
-                title={p.title}
-                discount_percent={p.discount_percent ? (p.discount_percent.percent) : null}
-                price_current={p.price_current}
-                is_new={p.is_new}
-                id={p.id}
-                tag={p.tag}
-                cart={props.cart}
-                tag_label={p.tag_label}
-                handleClick={props.handleClick}
-              />) : null)}
+            {productBestSeller.map((p: any) =>
+            (<CardItem
+              key={p.id}
+              img={p.img}
+              title={p.title}
+              discount_percent={p.discount_percent ? (p.discount_percent.percent) : null}
+              price_current={p.price_current}
+              is_new={p.is_new}
+              id={p.id}
+              tag={p.tag}
+              cart={props.cart}
+              tag_label={p.tag_label}
+              handleClick={props.handleClick}
+            />))}
           </Slider>
-          <div className='btn-seeMore'>
-            <Button title='see more'>See more</Button>
-          </div>
         </div>
       </div>
       <Container>
@@ -181,7 +179,7 @@ const ScreenCard = (props: any) => {
           {products.map((p: any) => (
             <CardItem
               key={p.id}
-              img={require('../../image/' + p.img)}
+              img={p.img}
               title={p.title}
               discount_percent={p.discount_percent ? (p.discount_percent.percent) : null}
               price_current={p.price_current}

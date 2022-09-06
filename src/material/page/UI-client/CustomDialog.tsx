@@ -58,6 +58,7 @@ export default function CustomizedDialogs(props: any) {
         props.shoppingCart.afterDiscountPrice = props.price_discount;
         props.shoppingCart.beforeDiscountPrice = props.price_current;
         props.shoppingCart.name = props.title;
+        props.shoppingCart.img = props.img;
         props.handleClick(props.shoppingCart);
         props.setOpen(false);
     }

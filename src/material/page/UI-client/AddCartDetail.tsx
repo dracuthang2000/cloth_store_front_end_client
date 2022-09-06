@@ -14,7 +14,7 @@ const AddCartDetail = (props: any) => {
     const [isSelectSize, setIsSelectSize] = useState({ select: false, id: '', quantity: 0 })
     const [quantityClotheIsSelect, setQuantityClotheIsSelect] = useState(0);
     useEffect(() => {
-        props.setShoppingCart({ ...props.shoppingCart, quantity_cart: quantity })
+        props.setShoppingCart({ ...props.shoppingCart, quantity: quantity })
     }, [quantity])
     useEffect(() => {
         console.log(props.id_product);
@@ -27,7 +27,7 @@ const AddCartDetail = (props: any) => {
                     tempArr[index] = {
                         id: c.id,
                         colorId: c.color.id,
-                        img: c.img,
+                        img: c.image_name,
                         color: c.color.color,
                         select: false
                     }
@@ -92,7 +92,8 @@ const AddCartDetail = (props: any) => {
                     if (color.colorId === isCheckColor.id && isCheckColor.check === true) {
                         props.setShoppingCart({
                             ...props.shoppingCart,
-                            color: color.color
+                            color: color.color,
+                            img: color.img
                         });
                         color.select = true;
                     } else {
@@ -137,7 +138,7 @@ const AddCartDetail = (props: any) => {
                             key={color.id}
                             id={color.id}
                             colorId={color.colorId}
-                            img={require('../../image/' + color.img)}
+                            img={color.img}
                             color={color.color}
                             isCheck={color.select}
                             setIsCheck={setIsCheckColor}

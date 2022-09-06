@@ -9,26 +9,38 @@ import LoginDialog from './login/LoginDialog'
 import { Avatar } from "@mui/material";
 import DropDownUser from "./dropdown/DropDownUser";
 
-
-
-
 const Navigate = (props: any) => {
     const navigate = useNavigate();
     const [showSearch, setShowSearch] = useState(false);
     const [showUser, setShowUser] = useState(false);
+    const [valueSearch, setValueSearch] = useState('');
+    const handleEnterPress = (e: any) => {
+        if (e.key === 'Enter') {
+            if (valueSearch === '') {
+                navigate(`product`);
+            } else {
+                navigate(`search/${valueSearch}`);
+            }
+        }
+    }
     return (
         <div className="navbar-design">
             <Row>
                 <Col xl={5}>
                     <Nav className="me-auto">
                         <Nav.Link style={{ paddingTop: '0px' }} as={Link} to={'/'}>HOME</Nav.Link>
-                        <Nav.Link style={{ paddingTop: '0px' }} as={Link} to={'/error'}>PRODUCT</Nav.Link>
+                        <Nav.Link style={{ paddingTop: '0px' }} as={Link} to={'/product'}>PRODUCT</Nav.Link>
                         <Nav.Link style={{ paddingTop: '0px' }} href="#pricing">GENDER<ExpandMore /></Nav.Link>
                         <Nav.Link style={{ paddingTop: '0px' }} href="#pricing">LABEL <ExpandMore /></Nav.Link>
                     </Nav>
                 </Col>
                 <Col xl={3}>
-                    {showSearch ? (<input className="form-control" style={{ position: 'absolute', top: '25px', width: '330px' }} placeholder={"search clothes ..."}></input>) : <></>}
+                    {showSearch ? (<input className="form-control"
+                        style={{ position: 'absolute', top: '25px', width: '330px' }}
+                        onKeyDown={handleEnterPress}
+                        value={valueSearch}
+                        onChange={(text: any) => setValueSearch(text.target.value)}
+                        placeholder={"search clothes ..."}></input>) : <></>}
                 </Col>
                 <Col xl={4}>
                     <Nav className="me-auto">

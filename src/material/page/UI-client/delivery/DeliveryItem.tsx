@@ -4,10 +4,11 @@ import { LocalShipping, HelpOutlineOutlined, PaidOutlined } from '@mui/icons-mat
 import { Button, Tooltip } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 function Items(props: any) {
+    console.log('check111', props);
     return (
         <div className="main">
             <div className="left">
-                <img src={require('../../../image/clothing.png')} alt="" />
+                <img src={`http://localhost:8081/api/product/image/load/${props.item.product_color_size.color.img}`} alt="" />
             </div>
             <div className="center">
                 <div className="title">{props.item.product_color_size.color.product.product_name}</div>
@@ -82,7 +83,7 @@ const DeliveryItem = (props: any) => {
                 </div>
                 <div className="left">
                     <Button style={{ backgroundColor: '#ee4d2d', color: 'white' }}>BUY AGAIN</Button>
-                    <Button>CANCELING</Button>
+                    {props.item.state === 'PRO' && <Button>CANCELING</Button>}
                     <Button onClick={handleClickDetail}>ORDER DETAIL</Button>
                 </div>
             </div>

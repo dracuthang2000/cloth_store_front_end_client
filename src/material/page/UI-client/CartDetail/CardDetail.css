@@ -94,4 +94,35 @@ body{
 #cartDetailContainer .cart-bottom .navBarBottom .detail .detail-center span::after{
     content: 'đ';
 }
+#cartDetailContainer .navBarCartInfo{
+    margin-top: 20px;
+    width: 800px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    border: 1px solid rgba(0,0,0,.125);
+    background-color: white;
+}
+#cartDetailContainer .navBarCartInfo .nav-item{
+    width: 100%;
+    padding:0 10px 0px 10px;
+    display: flex;
+    color: #05a;
+    /* justify-content: space-between; */
+}
+#cartDetailContainer .navBarCartInfo .nav-noti{
+    color: #ee4d2d;
+    padding:0 10px 0px 10px;
+    /* justify-content: space-between; */
+}
+#setting{
+    justify-content: right;
+}
+.info{
+    width: 100%;
+    padding: 0 10px 0px 0px;
+    display: flex;
+    justify-content: space-between;
+}
 

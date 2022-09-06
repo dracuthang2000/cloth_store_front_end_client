@@ -33,6 +33,7 @@ export default function LoginDialog(props: any) {
         }).then((res) => {
             localStorage.setItem("accessToken", res.data.accessToken);
             props.setAccessToken(localStorage.getItem('accessToken'));
+            setUser(userTP);
             props.setOpen(false);
         }).catch((error) => {
             setUserMessageError(error.response.data.message);
@@ -42,7 +43,6 @@ export default function LoginDialog(props: any) {
         if (!valid()) {
             loginApi();
         }
-        alert(JSON.stringify(user));
     }
     const valid = () => {
         let flagError = false;

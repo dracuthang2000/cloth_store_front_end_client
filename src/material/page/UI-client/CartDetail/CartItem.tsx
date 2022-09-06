@@ -3,8 +3,28 @@ import { Delete, Remove, Add, PowerInputSharp } from '@mui/icons-material'
 import BpCheckbox from "./BbCheckBox";
 import React, { useEffect, useState } from "react";
 import './CartItem.css'
+import Axios from "../../../Axios";
 const CartItem = (props: any) => {
     const [quantity, setQuantity] = useState(props.item.quantity);
+    const [quantityInStock, setQuantityInStock] = useState('' as any);
+    const [loadingQuantityStock, setLoadingQuantityStock] = useState(true);
+    const loadQuantityInStock = () => {
+        if (loadingQuantityStock) {
+            Axios.get(`product/get-quantity-in-stock`, {
+                params: {
+                    id: props.item.id
+                }
+            }).then(res => {
+                setQuantityInStock(res.data);
+                setLoadingQuantityStock(false);
+            }).catch(e => {
+
+            })
+        }
+    }
+    useEffect(() => {
+        loadQuantityInStock();
+    }, [loadingQuantityStock])
     const handleDecrease = () => {
         setQuantity(() => {
             if (quantity <= 1) {
@@ -17,7 +37,8 @@ const CartItem = (props: any) => {
     const handleIncrease = () => {
         setQuantity(() => {
             if (quantity !== 0) {
-                if (false) {
+                if (quantity + 1 > quantityInStock) {
+                    alert("Over stock")
                     return quantity;
                 } else {
                     return quantity + 1;
@@ -44,11 +65,12 @@ const CartItem = (props: any) => {
             </div>
             <div className="center">
                 <div className="top">
-                    <img src={props.item.img} />
+                    <img src={`http://localhost:8081/api/product/image/load/${props.item.img}`} />
                 </div>
                 <div className="bottom">
-                    <div className="priceAfterDiscount"><span>{new Intl.NumberFormat().format(props.item.afterDiscountPrice)}</span></div>
-                    {props.item.afterDiscountPrice !== props.item.beforeDiscountPrice ?
+                    <div className="priceAfterDiscount"><span>{props.item.afterDiscountPrice ? new Intl.NumberFormat().format(props.item.afterDiscountPrice) :
+                        new Intl.NumberFormat().format(props.item.beforeDiscountPrice)}</span></div>
+                    {props.item.afterDiscountPrice ?
                         <div className="priceBeforeDiscount"><span>{new Intl.NumberFormat().format(props.item.beforeDiscountPrice)}</span></div> : <></>
                     }
                 </div>
@@ -70,7 +92,8 @@ const CartItem = (props: any) => {
                 </div>
                 <div className="total">
                     <p>Total: </p>
-                    <span>{new Intl.NumberFormat().format(quantity * props.item.afterDiscountPrice)}</span>
+                    <span>{props.item.afterDiscountPrice ? new Intl.NumberFormat().format(quantity * props.item.afterDiscountPrice)
+                        : new Intl.NumberFormat().format(quantity * props.item.beforeDiscountPrice)}</span>
                 </div>
                 <div className="btn-item">
                     <Button

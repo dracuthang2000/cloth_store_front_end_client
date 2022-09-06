@@ -1,0 +1,60 @@
+.updateClothesContainer{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    -webkit-box-shadow: 2px 4px 10px 1px rgba(0,0,0,0.47);
+    box-shadow: 2px 4px 10px 1px rgba(201,201,201,0.47);
+    border-radius: 10px;
+    height: auto;
+    gap: 10px;
+    background-color: white;
+} */
+
+.updateClothesContainer .main{
+    display: flex;
+    gap: 20px;
+} 
+.updateClothesContainer .left{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 30px;
+} 
+.updateClothesContainer .right{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 10px;
+}
+.container-input {
+    display: flex;
+    flex-direction: column;
+}
+.updateClothesContainer .container-input .top{
+    padding-left: 5px;
+    justify-content: flex-start;
+    flex: 1;
+}
+/* .container-input label{
+    font-size: 18px;
+    font-weight: 600;
+    color: rgb(127, 118, 118);
+} */
+.updateClothesContainer .container-input .bottom{
+    flex:1
+}
+.updateClothesContainer .header h4{
+    color: rgb(127, 118, 118);
+}
+.updateClothesContainer .sizeColorContainer{
+    width: 100%;
+    height: 90vh;
+    padding: 20px;
+}
+.updateClothesContainer .btnContainer{
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10px;
+}

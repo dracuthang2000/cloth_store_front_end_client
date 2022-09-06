@@ -7,6 +7,10 @@ import NavigateHeader from './Header';
 import ScreenCard from './ScreenShowCard';
 import DeliveryState from './delivery/DeliveryState';
 import DeliveryDetail from './delivery/DeliveryDetail';
+import ChangeReceiver from './ReceiverInfo';
+import ProductScreen from './product/ProductScreen';
+import SearchScreen from './product/SearchScreen';
+import SignUp from './signUp/SignUp';
 interface CartTP {
     name: '',
     afterDiscountPrice: '',
@@ -14,14 +18,18 @@ interface CartTP {
     id_product_color_size: ''
     quantity: '',
     color: '',
-    size: ''
+    size: '',
+    img: '',
 };
 const MainPage = () => {
     const [cart, setCart] = useState<CartTP[]>([])
     const [accessToken, setAccessToken] = useState(localStorage.getItem('accessToken'));
     useEffect(() => {
+        console.log(cart);
         if (cart.length !== 0) {
             localStorage.setItem('cart', JSON.stringify(cart));
+        } else {
+            localStorage.removeItem('cart');
         }
     }, [cart])
     useEffect(() => {
@@ -52,10 +60,13 @@ const MainPage = () => {
                     <Routes>
                         <Route path='/shop/:tag_label/:tag' element={<Error />} />
                         <Route path='/' element={<ScreenCard handleClick={handleClick} />} />
-                        <Route path='/cart' element={<CartDetail setAccessToken={setAccessToken} />} />
-                        <Route path='/order/delivery-status' element={<DeliveryState />} />
-                        <Route path='/order/delivery-detail' element={<DeliveryDetail />} />
-
+                        <Route path='/cart' element={<CartDetail setAccessToken={setAccessToken} setCart={setCart} />} />
+                        <Route path='/product' element={<ProductScreen handleClick={handleClick} />}></Route>
+                        <Route path='/search/:keyword' element={<SearchScreen handleClick={handleClick} />}></Route>
+                        <Route path='/sign-up' element={<SignUp setAccessToken={setAccessToken} />} />
+                        {accessToken && <><Route path='/order/delivery-status' element={<DeliveryState />} />
+                            <Route path='/order/delivery-detail' element={<DeliveryDetail />} />
+                            <Route path='/cart/edit-receiver-information' element={<ChangeReceiver />} /></>}
                     </Routes>
                 </Row>
             </Container>

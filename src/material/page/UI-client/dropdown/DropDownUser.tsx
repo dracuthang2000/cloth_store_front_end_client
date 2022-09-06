@@ -94,6 +94,7 @@ export default function AccountMenu(props: any) {
                 <MenuItem onClick={() => {
                     localStorage.removeItem('accessToken');
                     props.setAccessToken(localStorage.getItem('accessToken'));
+                    navigate("/");
                 }}>
                     <ListItemIcon>
                         <Logout fontSize="small" />
