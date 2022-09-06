@@ -13,6 +13,7 @@ import Header from "../Header";
 import { ObjectFlags } from "typescript";
 
 interface initialCustomer {
+    id: string,
     first_name: string,
     last_name: string,
     mail: string,
@@ -40,7 +41,6 @@ const CartDetail = (props: any) => {
     const [cartItems, setCartItems] = useState<Partial<items>[]>([]);
     const [productIsChoose, setProductIsChoose] = useState(0);
     const [total, setTotal] = useState(0);
-    const [customerId, setCustomerId] = useState('');
     const [selectAll, setSelectAll] = useState(false);
     const [checkLogin, setCheckLogin] = useState(false);
     const [openPayment, setOpenPayment] = useState(false);
@@ -114,9 +114,10 @@ const CartDetail = (props: any) => {
             })
                 .then(res => {
                     let customerTemp = res.data;
-                    setCustomerId(customerTemp.id);
                     setCustomer({
-                        ...customer, first_name: customerTemp.first_name
+                        ...customer,
+                        id: customerTemp.id,
+                        first_name: customerTemp.first_name
                         , last_name: customerTemp.last_name,
                         address: customerTemp.address,
                         mail: customerTemp.mail,
@@ -198,7 +199,7 @@ const CartDetail = (props: any) => {
         Axios.post("bill/create-bill", {
             bill_product_details: arrBill,
             date: date,
-            id_customer: customerId,
+            id_customer: customer?.id,
             is_payment: true,
             note: "string",
             receiver: customer,

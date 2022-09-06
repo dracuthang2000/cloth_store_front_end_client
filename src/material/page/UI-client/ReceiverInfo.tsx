@@ -11,6 +11,7 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 
 interface initialReceiver {
+    id: string,
     first_name: string,
     last_name: string,
     address: string,
@@ -40,8 +41,8 @@ const ReceiverInfo = () => {
     const getCustomerInfo = () => {
         console.log(location);
         if (location != null) {
-            let reciever: any = location.state;
-            setCustomerInfo(reciever.receiver);
+            let receiver: any = location.state;
+            setCustomerInfo(receiver.receiver);
         }
     }
 
@@ -107,7 +108,12 @@ const ReceiverInfo = () => {
             error.mail = false;
             messageError.mail = '';
         }
+        setError(error);
+        setMessageError(messageError);
         return flag;
+    }
+    const handleCancel = () => {
+        navigate(-1);
     }
     return (
         <Container>
@@ -132,7 +138,7 @@ const ReceiverInfo = () => {
                                 </FormControl>}
                             </div>
                             <div className="container-input">
-                                <TextField label={'Name receiver*'}
+                                <TextField label={'First name receiver*'}
                                     className={'form-control'}
                                     name={"first_name"}
                                     onChange={handleChange}
@@ -178,6 +184,7 @@ const ReceiverInfo = () => {
                         </div>
                     </div>
                     <div className="btnContainer">
+                        <Button onClick={handleCancel} sx={{ width: '100px' }} variant="outlined">Cancel</Button>
                         <Button onClick={handleSave} sx={{ width: '100px' }} variant="outlined">Save</Button>
                     </div>
                 </div>
